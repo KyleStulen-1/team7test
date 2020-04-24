@@ -40,9 +40,6 @@
                           <th>Patient ID</th>
                           <th>Date</th>
                           <th>Time</th>
-                          <th>Pharmacy Selected</th>
-                          <th>Date Filled</th>
-                          <th>Time Filled</th>
                         </tr>
                         <% for(var x=0; x<userdata.length; x++) { %>
                           <tr>
@@ -52,9 +49,6 @@
                             <td><%= userdata[x].patient_ID %></td>
                             <td><%= userdata[x].date_prescribed %></td>
                             <td><%= userdata[x].time_prescribed %></td>
-                            <td><%= userdata[x].pharmacyID_Office_ID %></td>
-                            <td><%= userdata[x].date_fulfilled %></td>
-                            <td><%= userdata[x].time_fulfilled %></td>
                           </tr>
                           <% } %>
                 </div>

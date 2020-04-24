@@ -28,55 +28,45 @@
 
           <div class="container">
             <h1>Account Settings</h1><br>
-            <form action="/signup">
+            <form action="/accountsetting" method="POST">
 
               <label for="changepassword">Password:</label><br>
-              <input type="text" id="changepassword" name="changepassword" value={{password}} required><br>
+              <input type="text" id="changepassword" name="password" placeholder="Enter Password" required><br>
 
               <label for="changename">Name:</label><br>
-              <input type="text" id="changename" name="changename" value={{name}} required><br>
+              <input type="text" id="changename" name="name" placeholder="Enter Name" required><br>
+
+              <label for="changeDOB">Date of Birth:</label><br>
+              <input type="date" id="changeDOB" name="DOB" placeholder="Enter DOB" required><br>
 
               <label for="changeemail">Email:</label><br>
-              <input type="email" id="changeemail" name="changeemail" value={{email}} required><br>
+              <input type="email" id="changeemail" name="email" placeholder="Enter Email" required><br>
               
               <label for="changephone">Telephone Number:</label><br>
-              <input type="text" id="changephone" name="changephone" value={{phone}} required><br>
+              <input type="text" id="changephone" name="phone" placeholder="Enter Phone Number" required><br>
               
               <label for="changeaddress">Address:</label><br>
-              <input type="text" id="changeaddress" name="changeaddress" value={{address}} required><br>
+              <input type="text" id="changeaddress" name="address" placeholder="Enter Address" required><br>
               
               <label for="changesex">Sex:</label><br>
-              <select id="changesex" name="changesex" required>
+              <select id="changesex" name="sex" required>
                   <option disabled selected value>Select an option</option>
                   <option>Other</option>
                   <option>Male</option>
                   <option>Female</option>
               </select><br>
               
-              <label for="changepharm">Choose preferred Pharmacy Location:</label><br>
-              <select id="changepharm" name="changepharm" required>
-                  <option disabled selected value>Select an option</option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-              </select><br>
 
-              <label for="changedoc">Choose preferred Doctor:</label><br>
-              <select id="changedoc" name="changedoc" required>
-                  <option disabled selected value>Select an option</option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-              </select><br>
+              
               
               <br>
 
               <p>Emergency Contact Info</p>
               <label for="changeICEname">Name:</label><br>
-              <input type="text" id="changeICEname" name="changeICEname" value={{ICEname}} required><br>
+              <input type="text" id="changeICEname" name="ICEname" placeholder="Enter ICE Name" required><br>
 
               <label for="changeICEnumber">Number:</label><br>
-              <input type="text" id="changeICEnumber" name="changeICEnumber" value={{ICEnum}} required><br>
+              <input type="text" id="changeICEnumber" name="ICEnumber" placeholder="Enter ICE Number" required><br>
               
               <br>
 

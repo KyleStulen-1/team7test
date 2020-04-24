@@ -75,7 +75,21 @@ app.get('/report',function(req,res) {
 	res.render('reports');
 });
 
+app.get('/accountsetting',function(req,res){
+	res.sendFile(path.join(__dirname,'./views/patient_account_settings.html'));
 
+});
+app.post('/accountsetting',login.accountsetting);
+
+app.get('/newpatient',function(req,res){
+	res.render('newpatient_appointment');
+});
+
+
+app.get('/employeeaccountsetting',function(req,res){
+	res.sendfile(path.join(__dirname,'./views/employee_account_settings.html'));
+});
+app.post('/employeeaccountsetting',login.employeeaccountsetting);
 app.listen(3000);
 
 

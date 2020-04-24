@@ -18,9 +18,9 @@
                 <a class="navbar-brand">Team 7 Medical Clinic Database</a>
               </div>
               <ul class="nav navbar-nav">
-                <li><a href="patient_login_signup.html">Patient Login / Signup</a></li>
-                <li><a href="employee_login.html">Employee Login</a></li>
-                <li class="active"><a href="/home">Home</a></li>
+                <li><a href="/auth">Patient Login / Signup</a></li>
+                <li><a href="/employeeauth">Employee Login</a></li>
+                <li class="active"><a href="/dhome">Home</a></li>
                 <li><a href="/logout">Logout</a></li>
               </ul>
             </div>
@@ -28,25 +28,25 @@
 
           <div class="container">
             <h1>Account Settings</h1><br>
-            <form action="/signup">
+            <form action="/employeeaccountsetting"method="POST">
 
               <label for="changepassword">Password:</label><br>
-              <input type="text" id="changepassword" name="changepassword" value={{password}} required><br>
+              <input type="text" id="changepassword" name="password" placeholder = "Enter password" required><br>
 
               <label for="changename">Name:</label><br>
-              <input type="text" id="changename" name="changename" value={{name}} required><br>
+              <input type="text" id="changename" name="name" placeholder = "Enter name" required><br>
 
               <label for="changeemail">Email:</label><br>
-              <input type="email" id="changeemail" name="changeemail" value={{email}} required><br>
+              <input type="email" id="changeemail" name="email" placeholder = "Enter email" required><br>
               
               <label for="changephone">Telephone Number:</label><br>
-              <input type="text" id="changephone" name="changephone" value={{phone}} required><br>
+              <input type="text" id="changephone" name="phone" placeholder = "Enter Phone Number" required><br>
               
               <label for="changeaddress">Address:</label><br>
-              <input type="text" id="changeaddress" name="changeaddress" value={{address}} required><br>
+              <input type="text" id="changeaddress" name="address" placeholder = "Enter Address" required><br>
               
               <label for="changesex">Sex:</label><br>
-              <select id="changesex" name="changesex" required>
+              <select id="changesex" name="sex" required>
                   <option disabled selected value>Select an option</option>
                   <option>Other</option>
                   <option>Male</option>
@@ -58,10 +58,10 @@
 
               <p>Emergency Contact Info</p>
               <label for="changeICEname">Name:</label><br>
-              <input type="text" id="changeICEname" name="changeICEname" value={{ICEname}} required><br>
+              <input type="text" id="changeICEname" name="ICEname" placeholder = "Enter ICE name" required><br>
 
               <label for="changeICEnumber">Number:</label><br>
-              <input type="text" id="changeICEnumber" name="changeICEnumber" value={{ICEnum}} required><br>
+              <input type="text" id="changeICEnumber" name="ICEnumber" placeholder = "Enter ICE phone" required><br>
               
               <br>
 

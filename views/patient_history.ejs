@@ -41,7 +41,7 @@
               <th>Weight</th>
               <th>Temperature</th>
               <th>Reason for visit</th>
-              <th>Diagnosis</th>
+              
               <th>Doctor's Notes</th>
             </tr>
             <% for(var x=0; x<userdata.length; x++) { %>
@@ -54,7 +54,7 @@
                 <td><%= userdata[x].weight_lb %></td>
                 <td><%= userdata[x].temperature_F %></td>
                 <td><%= userdata[x].patient_input %></td>
-                <td><%= userdata[x].diagnosis_ID %></td>
+                
                 <td><%= userdata[x].doctors_notes %></td>
               </tr>
               <% } %>

@@ -3,6 +3,7 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
+//var popupS = require('popups');
 
 var connection = mysql.createConnection({
 	host: '73.32.82.191',
@@ -27,7 +28,7 @@ exports.register = function(req,res){
       var username = req.body.username;
       var password = req.body.password;
       var name = req.body.name;
-      
+      var DOB = req.body.DOB.toString();
       var email = req.body.email;
       var phone = req.body.phone;
       var address = req.body.address;
@@ -38,8 +39,8 @@ exports.register = function(req,res){
       
       
     
-    var sql = "INSERT INTO `patient`(username,password,name,email,phone_number,adress,sex,person_ICE,phone_ICE) VALUES (?,?,?,?,?,?,?,?,?) ";
-    connection.query(sql,[username,password,name,email,phone,address,sex,ICEname,number],function(error,results,fields){
+    var sql = "INSERT INTO `patient`(DOB,username,password,name,email,phone_number,adress,sex,person_ICE,phone_ICE) VALUES (?,?,?,?,?,?,?,?,?,?) ";
+    connection.query(sql,[DOB,username,password,name,email,phone,address,sex,ICEname,number],function(error,results,fields){
       if(error){
         throw error;
         
@@ -184,7 +185,11 @@ exports.submitprescription = function(req,res){
 	var drugID = req.body.drugID;
 	var sql = "INSERT INTO `prescription`(drug_ID,perscribed_by_doctor_ID,patient_ID) VALUES (?,?,?) ";
 	connection.query(sql,[drugID,id,patientID],function(error,results,fields){
-		if(error) throw error;
+		if(error) {
+			res.status(500).send(error.sqlMessage + "\n please press back on your browswer to return to the prescription page");
+			console.log(error.sqlMessage);
+			
+		}
 		else{
 			res.redirect('/employeeprescription');
 		}
@@ -235,7 +240,7 @@ exports.appointment = function(req,res){
 			res.render('patient_appointment',{userdata : results,user_ID:id});
 		}
 		else{
-			throw error;
+			res.redirect('/newpatient');
 		}
 		
 	});
@@ -249,6 +254,8 @@ exports.scheduleappointment = function(req,res){
 	var notes = req.body.notes;
 	var sql = "INSERT INTO `apointment`(Date, Time, apointment_reason, patient_ID, doctor_ID, office_ID) VALUES (?,?,?,?,?,?) ";
 	var sql2 = "DELETE FROM `apointment` WHERE apointment_ID = ?";
+	
+	
 	if(day != null){
 		connection.query(sql,[day,time,notes,id,doctor,location],function(error,result,fields){
 		if(error) throw error;
@@ -328,8 +335,8 @@ exports.report1 = function(req,res){
 	// var dateto ="2020-05-20"
 	var option = req.body.option;
 	console.log(option);
-	var sql = "SELECT * FROM `team7-medical`.`apointment` WHERE apointment.Date >='"+datefrom+ "'AND apointment.Date <='"+dateto+"' AND patient_ID = ?";
-	var sql2 = "SELECT * FROM `team7-medical`.`prescription` WHERE prescription.date_prescribed >='"+datefrom+ "'AND prescription.date_prescribed <='"+dateto+"' AND patient_ID = ?";
+	var sql = "SELECT * FROM `team7-medical`.`apointment` WHERE apointment.Date >='"+datefrom+ "'AND apointment.Date <='"+dateto+"' AND patient_ID = ? ORDER BY apointment.date";
+	var sql2 = "SELECT * FROM `team7-medical`.`prescription` WHERE prescription.date_prescribed >='"+datefrom+ "'AND prescription.date_prescribed <='"+dateto+"' AND patient_ID = ? ORDER BY prescription.date_prescribed";
 	if(option == "Appointment"){
 	connection.query(sql,[patientID],function(error,results,fields){
 		if(results.length > 0){
@@ -357,5 +364,48 @@ exports.report1 = function(req,res){
 	}
 }
 
+exports.accountsetting = function(req,res){
+	var id = req.session.patientID;
+	var password = req.body.password;
+	var name = req.body.name;
+	var email = req.body.email;
+	var phone = req.body.phone;
+	var address = req.body.address;
+	var sex = req.body.sex;
+	var DOB = req.body.DOB.toString();
+	var ICEname = req.body.ICEname;
+	var ICEnumber = req.body.ICEnumber;
+	console.log(req.body);
+	var sql = "UPDATE patient SET name = ?, DOB=?, password =?,phone_number=?, sex = ?, adress=?, person_ICE=?, phone_ICE=?, email=? WHERE patient_ID = ?";
+	connection.query(sql,[name,DOB,password,phone,sex,address,ICEname,ICEnumber,email,id],function(error,results,fields){
+		if(error) throw error;
+		else{
+			res.send("Successfully update your account");
+		}
+	});
 
+}
+exports.employeeaccountsetting = function(req,res){
+	var id = req.session.employeeID;
+	var password = req.body.password;
+	var name = req.body.name;
+	var email = req.body.email;
+	var phone = req.body.phone;
+	var address = req.body.address;
+	var sex = req.body.sex;
+	
+	var ICEname = req.body.ICEname;
+	var ICEnumber = req.body.ICEnumber;
+	
+	var sql = "UPDATE employee SET name = ?, password =?,phone_Cell=?, sex = ?, adress=?, person_ICE=?, phone_ICE=?, email=? WHERE employee_ID = ?";
+	connection.query(sql,[name,password,phone,sex,address,ICEname,ICEnumber,email,id],function(error,results,fields){
+		if(error) throw error;
+		else{
+			
+			
+			res.send("Successfully update your account");
+		}
+	});
+
+}
 
